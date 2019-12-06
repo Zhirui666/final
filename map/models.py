@@ -12,8 +12,8 @@ class sightings(models.Model):
             decimal_places = 10,
             help_text = _("Longitude"),
             )
-    Unique_Squirrel_ID = models.DecimalField(
-            max_digits = 100,
+    Unique_Squirrel_ID = models.CharField(
+            max_length = 100,
             help_text = _("Unique_Squirrel_ID"),
             )
     
@@ -66,7 +66,7 @@ class sightings(models.Model):
     
     Primary_Fur_Color = models.CharField(
             max_length = 30,
-            choices = COLOR_CHOICES,
+            choices = PRIMARY_FUR_COLOR_CHOICES,
             default = Other,
             help_text = _('Primary_Fur_Color'),
             )
