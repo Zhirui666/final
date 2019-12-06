@@ -1,46 +1,21 @@
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from sightings.models import sightings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
 from .forms import ModelForm
 
-def index(request):
+def index(request)：
     try:
-        sightings = sightings.objects.all()
+        Sightings = sightings.objects.all()
     except:
         raise Http404("No such squirrel!")
-    return render(request,'sightings/index.html', {'sightings': sightings})
-
-
+    return render(request,'sightings/index.html', {'sightings': Sightings})
 
 def add(request):
     if request.method=="POST":
         if request.POST.get('latitude') and request.POST.get('longitude') and request.POST.get('unique_squirrel_id'):            
-            squirrel=sightings()
-            squirrel.Longitude=request.POST.get('Longitude')
-            squirrel.Latitude=request.POST.get('latitude')
-            squirrel.Unique_Squirrel_ID=request.POST.get('unique_squirrel_id')
-            squirrel.Shift=request.POST.get('shift')
-            squirrel.Date=request.POST.get('date')
-            squirrel.Age=request.POST.get('age')
-            squirrel.Primary_Fur_Color=request.POST.get('primary_fur_color')
-            squirrel.Location=request.POST.get('location')
-            squirrel.Specific_Location=request.POST.get('specific_location')
-            squirrel.Running=request.POST.get('running')
-            squirrel.Chasing=request.POST.get('chasing')
-            squirrel.Climbing=request.POST.get('climbing')
-            squirrel.Cating=request.POST.get('eating')
-            squirrel.Foraging=request.POST.get('foraging')
-            squirrel.Other_Activities=request.POST.get('other_activities')
-            squirrel.Kuks=request.POST.get('kuks')
-            squirrel.Quaas=request.POST.get('quaas')
-            squirrel.Moans=request.POST.get('moans')
-            squirrel.Tail_flags=request.POST.get('tail_flags')
-            squirrel.Tail_twitches=request.POST.get('tail_twitches')
-            squirrel.Approaches=request.POST.get('approaches')
-            squirrel.Indifferent=request.POST.get('indifferent')
-            squirrel.Runs_from=request.POST.get('runs_from')
+            table=
             squirrel.save()
             context={'sightings':sightings.objects.all(),}
             return render(request,'sightings/index.html',context)
@@ -57,7 +32,7 @@ def stats(request):
     sightings_stats2=sightings.objects.filter(Primary_Fur_Color='Black').count()
     sightings_stats3=sightings.objects.filter(Running='True').count()
     sightings_stats4=sightings.objects.filter(Age='Adult').count()
-    sightings_stats5=sightings.objects.filter(Age='Juvenile').count()
+    sightings_stats5=sightings.ects.filter(Age='Juvenile').count()
     context={
             'Number of all the sightings':sightings_stats1,
             'Number of black primary fur color sightings':sightings_stats2,
