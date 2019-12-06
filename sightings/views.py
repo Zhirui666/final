@@ -1,15 +1,17 @@
 
-from django.shortcuts import render,redirect
-from .models import sightings
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from sightings.models import sightings
+from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
+from .forms import ModelForm
 
-def first(request):
+def index(request):
     try:
-        Sightings=sightings.objects.all()
+        sightings = sightings.objects.all()
     except:
         raise Http404("No such squirrel!")
-    return render(request,'sightings/first.html',{'sightings':Sightings})
+    return render(request,'sightings/index.html', {'sightings': sightings})
+
 
 
 def add(request):
