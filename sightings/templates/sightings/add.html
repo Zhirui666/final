@@ -1,1 +1,139 @@
-add html
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Add a new sighting</title>
+    <meta charset="utf-8">
+    
+    </head>
+    <body>
+
+        <div class="miniwrap">
+        <h1>Add a new sighting</h1>
+        <form action="/add/" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        
+        <ul>
+        
+        <li><h3>Latitude:</h3>
+        <input type="number" name='Latitude'>
+        </li>
+        
+        <li><h3>Longitude:</h3>
+        <input type='number' name='Longitude'>
+        </li>
+        
+        <li><h3>Unique Squirrel ID:</h3>
+        <input type='text' name='UniqueSquirrelID'>
+        </li>
+        
+        <li><h3>Shift:</h3>
+        <input type="checkbox" name="Shift" value="AM"> AM<br>
+        <input type="checkbox" name="Shift" value="PM" checked> PM<br>
+        </li>
+        
+        <li><h3>Date:</h3>
+        <input type="date" name="Date">
+        </li>
+        
+        <li><h3>Age: </h3>
+        <input type='checkbox' name='Age' value='Adult'> Adult<br>
+        <input type='checkbox' name='Age' value='Juvenile'checked> Juvenile<br>
+        </li>
+        
+        <li><h3>Primary Fur Color: </h3>
+        <input type='checkbox' name='PrimaryFurColor' value='Gray'> Gray<br>
+        <input type='checkbox' name='PrimaryFurColor' value='Cinnamon'> Cinnamon<br>
+        <input type='checkbox' name='PrimaryFurColor' value='Black'> Black<br>
+        <input type='checkbox' name='PrimaryFurColor' value='Other'checked> Other<br>
+        </li>
+        
+        <li><h3>Location: </h3>
+        <input type='checkbox' name='Location' value='Above Ground'> Above Ground<br>
+        <input type='checkbox' name='Location' value='Ground Plane'> Ground Plane<br>
+        <input type='checkbox' name='Location' value='Other'checked> Other<br>
+        </li>
+        
+        <li><h3>Specific Location: </h3>
+        <input type='text' name="SpecificLocation">
+        </li>
+        
+        <li><h3>Running: </h3>
+        <input type='checkbox' name='Running' value='True'> True<br>
+        <input type='checkbox' name='Running' value='False'checked> False<br>
+        </li>
+        
+        <li><h3>Chasing: </h3>
+        <input type='checkbox' name='Chasing' value='True'> True<br>
+        <input type='checkbox' name='Chasing' value='False'checked> False<br>
+        </li>
+        
+        <li><h3>Climbing: </h3>
+        <input type='checkbox' name='Climbing' value='True'> True<br>
+        <input type='checkbox' name='Climbing' value='False'checked> False<br>
+        </li>
+        
+        <li><h3>Eating: </h3>
+        <input type='checkbox' name='Eating' value='True'> True<br>
+        <input type='checkbox' name='Eating' value='False'checked> False<br>
+        </li>
+        
+        <li><h3>Foraging: </h3>
+        <input type='checkbox' name='Foraging' value='True'> True<br>
+        <input type='checkbox' name='Foraging' value='False'checked> False<br>
+        </li>
+        
+        <li><h3>Other Activities: </h3>
+        <input type='checkbox' name='OtherActivities' value='True'> True<br>
+        <input type='checkbox' name='OtherActivities' value='False'checked> False<br>
+        </li>
+        
+        <li><h3>Kuks: </h3>
+        <input type='checkbox' name='Kuks' value='True'> True<br>
+        <input type='checkbox' name='Kuks' value='False'checked> False<br>
+        </li>
+        
+        <li><h3>Quaas: </h3>
+        <input type='checkbox' name='Quaas' value='True'> True<br>
+        <input type='checkbox' name='Quaas' value='False'checked> False<br>
+        </li>
+        
+        <li><h3>Moans: </h3>
+        <input type='checkbox' name='Moans' value='True'> True<br>
+        <input type='checkbox' name='Moans' value='False'checked> False<br>
+        </li>
+        
+        <li><h3>Tail Flags: </h3>
+        <input type='checkbox' name='TailFlags' value='True'> True<br>
+        <input type='checkbox' name='TailFlags' value='False'checked> False<br>
+        </li>
+        
+        <li><h3>Tail Twitches: </h3>
+        <input type='checkbox' name='TailTwitches' value='True'> True<br>
+        <input type='checkbox' name='TailTwitches' value='False'checked> False<br>
+        </li>
+        
+        <li><h3>Approaches: </h3>
+        <input type='checkbox' name='Approaches' value='True'> True<br>
+        <input type='checkbox' name='Approaches' value='False'checked> False<br>
+        </li>
+        
+        <li><h3>Indifferent: </h3>
+        <input type='checkbox' name='Indifferent' value='True'> True<br>
+        <input type='checkbox' name='Indifferent' value='False'checked> False<br>
+        </li>
+        
+        <li><h3>Runs from: </h3>
+        <input type='checkbox' name='Runsfrom' value='True'> True<br>
+        <input type='checkbox' name='Runsfrom' value='False'checked> False<br>
+        </li>
+        
+        </ul>
+        
+        <br>
+        <br>
+        <br>
+        <input type="Submit" value="Add">
+        </form>
+    </body>
+</html>   
