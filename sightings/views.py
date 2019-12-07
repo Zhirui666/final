@@ -17,15 +17,11 @@ def index(request):
 def add(request):
     if request.method=='POST':
         table = SquTable(request.POST)
-        if table.is_valid():
-            table.save()
-            return redirect(f'/sightings/')
-    else:
-        table = SquTable()
+        table.save()
+        return redirect('/sightings/')
 
-    context = {'table': table}
 
-    return render(request, 'sightings/add.html', context)
+    return render(request, 'sightings/add.html')
 
 def map(request):
     squirrels=sightings.objects.all()[:100]
