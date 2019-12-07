@@ -3,7 +3,7 @@ from django.utils.translation import gettext as _
 
 from django.utils import timezone
 
-class sightings(models.Model):
+class sightings_model(models.Model):
     Longitude = models.DecimalField(
             help_text='Longitude',
             max_digits=16,
