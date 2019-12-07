@@ -53,7 +53,7 @@ def edit(request,Unique_Squirrel_ID):
    # details = get_object_or_404(squ_model,Unique_Squirrel_ID=Unique_Squirrel_ID)
     if request.method == "POST":
         if 'delete' in request.POST:
-            details.delete()
+            information.delete()
         else:
             list_=list(request.POST.values())[1:]
             sqs = sightings.objects.filter(Unique_Squirrel_ID=Unique_Squirrel_ID)
