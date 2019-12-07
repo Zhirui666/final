@@ -27,6 +27,11 @@ def add(request):
 
     return render(request, 'sightings/add.html', context)
 
+def map(request):
+    squirrels=sightings.objects.all()[:100]
+    return render(request, 'sightings/map.html', {'squirrels':squirrels})
+
+
 def edit(request, Unique_Squirrel_ID):
     information = sightings.objects.get(Unique_Squirrel_ID = Unique_Squirrel_ID)
     if request.method == "POST":
