@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from map.models import squirrels
+from map.models import sightings
 
-admin.site.register(squirrels)
+admin.site.register(sightings)
