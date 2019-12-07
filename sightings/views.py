@@ -5,6 +5,9 @@ from .models import sightings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
 from .forms import SquTable
+from django.forms import ModelForm
+from django.db.models import Count
+
 
 def index(request):
     sightings_ = sightings.objects.all()
@@ -28,21 +31,21 @@ def edit(request, Unique_Squirrel_ID):
     information = sightings.objects.get(Unique_Squirrel_ID = Unique_Squirrel_ID)
     if request.method == "POST":
         if 'delete' in request.POST:
-            inofrmation.delete()
+            information.delete()
         else:
-            list_=list(request.POST.values())[1: ]
+            list_=list(request.POST.values())[1:]
             squirrel=sightings.objects.filter(Unique_Squirrel_ID = Unique_Squirrel_ID)
             information= SquTable(request.POST, instance = squirrel[0])
             if information.is_valid():
-                models=apps.get_model('sightings','sightings')
-                names = [a.name for a in model._Change.fields][1: ]
+                model=apps.get_model('sightings','sightings')
+                names = [a.name for a in model._meta.fields][1:]
                 for s in squirrel:
                     for index, field in enumerate(names):
                         if list_[index]:
                             setattr(s, field, list_[index])
                     s.save()
-        return redirect(f'/sightings/')
-    return render(request,'sightings/edit.html',{'information': information})
+        return redirect('/sightings/')
+    return render(request,'sightings/edit.html',{'information':information})
 
 
 def stats(request):
