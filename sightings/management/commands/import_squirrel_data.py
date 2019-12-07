@@ -17,8 +17,8 @@ class Command(BaseCommand):
         for item in data:
             squirrel=sightings(
                 Unique_Squirrel_ID=item['Unique Squirrel ID'],
-                Longitude=(item['Longitude']),
-                Latitude=item['Latitude'],
+                Longitude=item['X'],
+                Latitude=item['Y'],
                 Shift=item['Shift'],
                 Date=item['Date'][4:]+'-'+item['Date'][:2]+'-'+item['Date'][2:4],
                 Age=item['Age'],

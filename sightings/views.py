@@ -62,14 +62,14 @@ def stats(request):
             }
     return render(request, 'sightings/stats.html', context)
 
-def update(request,Unique_Squirrel_ID):
-    sightings_ = get_object_or_404(sightings, Unique_Squirrel_ID=Unique_Squirrel_ID)
-    if request.method=="POST":
-        table = SquTable(request.POST, instance=sightings_)
-        if table.is_valid():
-            table.save()
-            sightings_ = sightings.objects.all()
-            context = {'sightings': sightings_,}
-            return render(request,'sightings/index.html',context)
-    context = {'table':table, }
-    return render(request, 'sightings/update.html',context)
+#def update(request,Unique_Squirrel_ID):
+#    sightings_ = get_object_or_404(sightings, Unique_Squirrel_ID=Unique_Squirrel_ID)
+ #   if request.method=="POST":
+  #      table = SquTable(request.POST, instance=sightings_)
+   #     if table.is_valid():
+    #        table.save()
+     #       sightings_ = sightings.objects.all()
+      #      context = {'sightings': sightings_,}
+         #   return render(request,'sightings/index.html',context)
+    #context = {'table':table, }
+    # return render(request, 'sightings/update.html',context)
