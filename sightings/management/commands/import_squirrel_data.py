@@ -1,5 +1,7 @@
 import csv
-from django.core.management import BaseCommand
+import io
+
+from django.core.management.base  import BaseCommand
 
 from sightings.models import sightings
 
@@ -8,36 +10,36 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('csv_file')
 
-    def handle(self, *args,**kargs):
-        path=kargs['csv_file']
-        with open(kargs['csv_file']) as fp:
-            reader = csv.DictReader(fp)
+    def handle(self, *args,**options):
+        with open(options['csv_file']) as fp:
+            data = fp.read().strip()
+            reader = csv.DictReader(io.StringIO(data))
             data = list(reader)
     
         for item in data:
             squirrel=sightings(
-                Unique_Squirrel_ID=item['Unique Squirrel ID'],
-                Longitude=item['X'],
-                Latitude=item['Y'],
-                Shift=item['Shift'],
-                Date=item['Date'][4:]+'-'+item['Date'][:2]+'-'+item['Date'][2:4],
-                Age=item['Age'],
-                Primary_fur_color=item['Primary_Fur_Color'],
-                Location=item['Location'],
-                Specific_location=item['Specific_Location'],
-                Running=item['Running'],
-                Chasing=item['Chasing'],
-                Climbing=item['Climbing'],
-                Eating=item['Eating'],
-                Foraging=item['Foraging'],
-                Other_Activities=item['Other_Activities'],
-                Kuks=item['Kuks'],
-                Quaas=item['Quaas'],
-                Moans=item['Moans'],
-                Tail_flags=item['Tail_flags'],
-                Tail_twitches=item['Tail_twitches'],
-                Approaches=item['Approaches'],
-                Indifferent=item['Indifferent'],
-                Runs_from=item['Runs_from'],
+                Longitude=item['x'],
+                Latitude=item['y'],
+                Unique_Squirrel_ID=item['unique_squirrel_id'],
+                Shift=item['shift'],
+                Date=item['date'][4:]+'-'+item['date'][:2]+'-'+item['date'][2:4],
+                Age=item['age'],
+                Primary_Fur_Color=item['primary_fur_color'],
+                Location=item['location'],
+                Specific_Location=item['specific_location'],
+                Running=item['running'],
+                Chasing=item['chasing'],
+                Climbing=item['climbing'],
+                Eating=item['eating'],
+                Foraging=item['foraging'],
+                Other_Activities=item['other_activities'],
+                Kuks=item['kuks'],
+                Quaas=item['quaas'],
+                Moans=item['moans'],
+                Tail_flags=item['tail_flags'],
+                Tail_twitches=item['tail_twitches'],
+                Approaches=item['approaches'],
+                Indifferent=item['indifferent'],
+                Runs_from=item['runs_from'],
                 )
             squirrel.save()

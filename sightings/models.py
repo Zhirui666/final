@@ -36,7 +36,6 @@ class sightings(models.Model):
     Date = models.DateField(
         help_text = _('Date'),
         max_length=100,
-        default = timezone.now,
         blank=True,
         null=True,
         )
@@ -55,7 +54,6 @@ class sightings(models.Model):
     Age = models.CharField(
         max_length = 10,
         choices = AGE_CHOICES,
-        default = Other,
         help_text = _('Age'),
         )
     
@@ -74,7 +72,6 @@ class sightings(models.Model):
     Primary_Fur_Color = models.CharField(
             max_length = 30,
             choices = PRIMARY_FUR_COLOR_CHOICES,
-            default = Other,
             help_text = _('Primary_Fur_Color'),
             )
     
@@ -91,7 +88,6 @@ class sightings(models.Model):
     Location = models.CharField(
         max_length = 30,
         choices = LOCATION_CHOICES,
-        default = Other,
         help_text = _('Location'),
         )
     
@@ -101,27 +97,22 @@ class sightings(models.Model):
         )
     
     Running = models.BooleanField(
-        default = False,
         help_text = _('Running'),
         )
     
     Chasing = models.BooleanField(
-        default = False,
         help_text = _('Chasing'),
         )
     
     Climbing = models.BooleanField(
-        default = False,
         help_text = _('Climbing'),
         )
     
     Eating = models.BooleanField(
-        default = False,
         help_text = _('Eating'),
         )
     
     Foraging = models.BooleanField(
-        default = False,
         help_text = _('Foraging'),
         )
     
@@ -131,42 +122,34 @@ class sightings(models.Model):
         )
     
     Kuks = models.BooleanField(
-        default = False,
         help_text = _('Kuks'),
         )
     
     Quaas = models.BooleanField(
-        default = False,
         help_text = _('Quaas'),
         )
     
     Moans = models.BooleanField(
-        default = False,
         help_text = _('Moans'),
         )
     
     Tail_flags = models.BooleanField(
-        default = False,
         help_text = _('Tail_flags'),
         )
     
     Tail_twitches = models.BooleanField(
-        default = False,
         help_text = _('Tail_twitchs'),
         )
     
     Approaches = models.BooleanField(
-        default = False,
         help_text = _('Approaches'),
         )
     
     Indifferent = models.BooleanField(
-        default = False,
         help_text = _('Indifferent'),
         )
     
     Runs_from = models.BooleanField(
-        default = False,
         help_text = _('Runs_from'),
         )
     
