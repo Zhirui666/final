@@ -1,7 +1,7 @@
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.apps import apps
-from .models import sightings
+from .models import sightings_model
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
 from .forms import SquForm
@@ -10,8 +10,8 @@ from django.db.models import Count
 
 
 def index(request):
-    sightings_ = sightings.objects.all()
-    context = {'sightings': sightings_,}
+    squirrels = sightings_model.objects.all()
+    context = {'squirrels': squirrels,}
     return render(request,'sightings/index.html', context)
 
 def add(request):
@@ -24,7 +24,7 @@ def add(request):
     return render(request, 'sightings/add.html')
 
 def map(request):
-    squirrels=sightings.objects.all()[:100]
+    squirrels=sightings_model.objects.all()[:100]
     return render(request, 'sightings/map.html', {'squirrels':squirrels})
 
 
@@ -49,17 +49,17 @@ def map(request):
 #     return render(request,'sightings/edit.html',{'information':information})
 
 def edit(request,Unique_Squirrel_ID):
-    information = sightings.objects.get(Unique_Squirrel_ID=Unique_Squirrel_ID)
+    information = sightings_model.objects.get(Unique_Squirrel_ID=Unique_Squirrel_ID)
    # details = get_object_or_404(squ_model,Unique_Squirrel_ID=Unique_Squirrel_ID)
     if request.method == "POST":
         if 'delete' in request.POST:
             information.delete()
         else:
             list_=list(request.POST.values())[1:]
-            sqs = sightings.objects.filter(Unique_Squirrel_ID=Unique_Squirrel_ID)
+            sqs = sightings_model.objects.filter(Unique_Squirrel_ID=Unique_Squirrel_ID)
             information = SquForm(request.POST,instance=sqs[0])
             if information.is_valid():
-                model=apps.get_model('sightings','sightings')
+                model=apps.get_model('sightings','sightings_model')
                 field_names = [f.name for f in model._meta.fields][1:]
                 for sq in sqs:
                     for idx,f in enumerate(field_names):
@@ -70,11 +70,11 @@ def edit(request,Unique_Squirrel_ID):
     return render(request, 'sightings/edit.html',{'information':information})
 
 def stats(request):
-    Totals=sightings.objects.all().count()
-    Running=sightings.objects.filter(Running='True').count()
-    Eating=sightings.objects.filter(Eating='True').count()
-    Adults=sightings.objects.filter(Age='Adult').count()
-    Gray=sightings.objects.filter(Primary_Fur_Color='Gray').count()
+    Totals=sightings_model.objects.all().count()
+    Running=sightings_model.objects.filter(Running='True').count()
+    Eating=sightings_model.objects.filter(Eating='True').count()
+    Adults=sightings_model.objects.filter(Age='Adult').count()
+    Gray=sightings_model.objects.filter(Primary_Fur_Color='Gray').count()
     context={
             'Totals':Totals,
             'Running':Running,
