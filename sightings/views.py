@@ -1,75 +1,72 @@
 
 from django.shortcuts import render, get_object_or_404, redirect
-from sightings.models import sightings
+from django.apps import apps
+from .models import sightings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
-from .forms import ModelForm
+from .forms import SquTable
 
 def index(request)：
-    try:
-        Sightings = sightings.objects.all()
-    except:
-        raise Http404("No such squirrel!")
-    return render(request,'sightings/index.html', {'sightings': Sightings})
+    sightings_ = sightings.objects.all()
+    context = {'sightings': sightings_,}
+    return render(request,'sightings/index.html', context)
 
 def add(request):
     if request.method=="POST":
-        if request.POST.get('latitude') and request.POST.get('longitude') and request.POST.get('unique_squirrel_id'):            
-            table=
-            squirrel.save()
-            context={'sightings':sightings.objects.all(),}
+        table = SquTable(request.POST)
+        if table.is_valid():
+            table.save()
+            sightings_ = sightings.objects.all()
+            context = {'sightings': sightings_,}
             return render(request,'sightings/index.html',context)
-    elif request.method=="GET":
-            return render(request,'sightings/add.html')
+     return render(request,'sightings/add.html',{'table': table, })
 
-def details(request,Unique_Squirrel_ID):
-    squirrel = sightings.objects.get(Unique_Squirrel_ID=Unique_Squirrel_ID)
-    context = {'squirrel':squirrel,}
-    return render(request,'sightings/details.html',context)
+def edit(request, ID):
+    information = sightings.obects.get(Unique_Squirrel_ID = ID)
+    if request.method == "POST":
+        if 'delete' in request.POST:
+            details.delete()
+        else:
+            list_=list(request.POST.values())[1: ]
+            squirrel=sightings.objects.filter(Unique_Squirrel_ID = ID)
+            details = SquTable(request.POST, instance = squirrel[0])
+            if details.is_valid():
+                models=apps.get_model('sightings','sightings')
+                names = [a.name for a in model._Change.fields][1: ]
+                for s in squirrel:
+                    for index, field in enumerate(names):
+                        if list_[index]:
+                            setattr(s, field, list_[index])
+                    s.save()
+        sightings_ = sightings.objects.all()
+        context = {'sightings': sightings_,} 
+        return render(request,'sightings/index.html',context)
+    return render(request,'sightings/edit.html',{'information': information})
+
 
 def stats(request):
-    sightings_stats1=sightings.objects.all().count()
-    sightings_stats2=sightings.objects.filter(Primary_Fur_Color='Black').count()
-    sightings_stats3=sightings.objects.filter(Running='True').count()
-    sightings_stats4=sightings.objects.filter(Age='Adult').count()
-    sightings_stats5=sightings.ects.filter(Age='Juvenile').count()
+    Totals=sightings.objects.all().count()
+    Running=sightings.objects.filter(Running='True').count()
+    Eating=sightings.objects.filter(Eating='True').count()
+    Adults=sightings.objects.filter(Age='Adult').count()
+    Gray=sightings.objects.filter(Primary_Fur_Color='Gray').count()
     context={
-            'Number of all the sightings':sightings_stats1,
-            'Number of black primary fur color sightings':sightings_stats2,
-            'Number of running sightings':sightings_stats3,
-            'Number of adult sightings':sightings_stats4,
-            'Number of juvenile sightings':sightings_stats5,
+            'Total Number of all squirrels':Totals,
+            'Number of squirrels that are running':Running,
+            'Number of squirrels that are eating':Eating,
+            'Nmuber of adults squirrels':Adults, 
+            'Number of squirrels with gray fur':Gray,
             }
     return render(request, 'sightings/stats.html', context)
 
 def update(request,Unique_Squirrel_ID):
-    squirrel = sightings.objects.get(Unique_Squirrel_ID=Unique_Squirrel_ID)
+    sightings_ = get_object_or_404(sightings, Unique_Squirrel_ID=Unique_Squirrel_ID)
     if request.method=="POST":
-        squirrel.Longitude=request.POST.get['longitude']
-        squirrel.Latitude=request.POST.get['latitude']
-        squirrel.Shift=request.POST.get['shift']
-        squirrel.Date=request.POST.get['date']
-        squirrel.Age=request.POST.get['age']
-        squirrel.Primary_Fur_Color=request.POST.get['primary_fur_color']
-        squirrel.Location=request.POST.get['location']
-        squirrel.Specific_Location=request.POST.get['specific_location']
-        squirrel.Running=request.POST.get['running']
-        squirrel.Chasing=request.POST.get['chasing']
-        squirrel.Climbing=request.POST.get['climbing']
-        squirrel.Eating=request.POST.get['eating']
-        squirrel.Foraging=request.POST.get['foraging']
-        squirrel.Other_activities=request.POST.get['other_activities']
-        squirrel.Kuks=request.POST.get['kuks']
-        squirrel.Quaas=request.POST.get['quaas']
-        squirrel.Moans=request.POST.get['moans']
-        squirrel.Tail_flags=request.POST.get['tail_flags']
-        squirrel.Tail_twitches=request.POST.get['tail_twitches']
-        squirrel.Approaches=request.POST.get['approaches']
-        squirrel.Indifferent=request.POST.get['indifferent']
-        squirrel.Runs_from=request.POST.get['runs_from']
-        squirrel.save()
-        context={'squirrel':squirrel,}
-        return render(request,'sightings/details.html',context)
-    elif request.method=="GET":
-        context={'squirrel':squirrel,}
-        return render(request,'sightings/update.html',context)
+        table = SquTable(request.POST, instance=sightings_)
+        if table.is_valid():
+            table.save()
+            sightings_ = sightings.objects.all()
+            context = {'sightings': sightings_,}
+            return render(request,'sightings/index.html',context)
+    context = {'table':table, }
+    return render(request, 'sightings/update.html',context)
