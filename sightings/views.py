@@ -61,7 +61,7 @@ def edit(request,Unique_Squirrel_ID):
         else:
             list_=list(request.POST.values())[1:]
             sqs = sightings.objects.filter(Unique_Squirrel_ID=Unique_Squirrel_ID)
-            information = SquForm(request.POST,instance=sqs[0])
+            information = SquTable(request.POST,instance=sqs[0])
             if information.is_valid():
                 model=apps.get_model('sightings','sightings')
                 field_names = [f.name for f in model._meta.fields][1:]
