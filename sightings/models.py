@@ -1,16 +1,13 @@
 from django.db import models
 from django.utils.translation import gettext as _
 
+from django.utils import timezone
+
 class sightings(models.Model):
     Latitude = models.DecimalField(
-            max_digits = 100,
-            decimal_places = 10,
-            help_text = _("Latitude"),
-            )
-    Longitude = models.DecimalField(
-            max_digits = 100,
-            decimal_places = 10,
-            help_text = _("Longitude"),
+            help_text='Longitude',
+            max_digits=16,
+            decimal_places=13,
             )
     Unique_Squirrel_ID = models.CharField(
             max_length = 100,
@@ -32,6 +29,10 @@ class sightings(models.Model):
     
     Date = models.DateField(
         help_text = _('Date'),
+        max_length=100,
+        default = timezone.now,
+        blank=True,
+        null=True,
         )
     
     

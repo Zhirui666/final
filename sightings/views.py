@@ -12,14 +12,17 @@ def index(request):
     return render(request,'sightings/index.html', context)
 
 def add(request):
-    if request.method=="POST":
+    if request.method=='POST':
         table = SquTable(request.POST)
         if table.is_valid():
             table.save()
-            sightings_ = sightings.objects.all()
-            context = {'sightings': sightings_,}
-            return render(request,'sightings/index.html',context)
-    return render(request,'sightings/add.html',{'table': table,})
+            return redirect(f'/sightings/')
+    else:
+        table = SquTable()
+
+    context = {'table': table}
+
+    return render(request, 'sightings/add.html', context)
 
 def edit(request, ID):
     information = sightings.obects.get(Unique_Squirrel_ID = ID)
