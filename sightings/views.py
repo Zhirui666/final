@@ -4,7 +4,7 @@ from django.apps import apps
 from .models import sightings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
-from .forms import SquTable
+from .forms import SquForm
 from django.forms import ModelForm
 from django.db.models import Count
 
@@ -16,8 +16,8 @@ def index(request):
 
 def add(request):
     if request.method=='POST':
-        table = SquTable(request.POST)
-        table.save()
+        form = SquForm(request.POST)
+        form.save()
         return redirect('/sightings/')
 
 
@@ -57,7 +57,7 @@ def edit(request,Unique_Squirrel_ID):
         else:
             list_=list(request.POST.values())[1:]
             sqs = sightings.objects.filter(Unique_Squirrel_ID=Unique_Squirrel_ID)
-            information = SquTable(request.POST,instance=sqs[0])
+            information = SquForm(request.POST,instance=sqs[0])
             if information.is_valid():
                 model=apps.get_model('sightings','sightings')
                 field_names = [f.name for f in model._meta.fields][1:]

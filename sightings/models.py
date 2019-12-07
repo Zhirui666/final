@@ -153,5 +153,3 @@ class sightings(models.Model):
         help_text = _('Runs_from'),
         )
     
-    def __str__(self):
-        return self.Unique_Squirrel_ID
