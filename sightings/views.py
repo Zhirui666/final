@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
 from .forms import SquTable
 
-def index(request)：
+def index(request):
     sightings_ = sightings.objects.all()
     context = {'sightings': sightings_,}
     return render(request,'sightings/index.html', context)
@@ -19,7 +19,7 @@ def add(request):
             sightings_ = sightings.objects.all()
             context = {'sightings': sightings_,}
             return render(request,'sightings/index.html',context)
-     return render(request,'sightings/add.html',{'table': table, })
+    return render(request,'sightings/add.html',{'table': table,})
 
 def edit(request, ID):
     information = sightings.obects.get(Unique_Squirrel_ID = ID)
