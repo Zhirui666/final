@@ -28,12 +28,12 @@ def edit(request, Unique_Squirrel_ID):
     information = sightings.objects.get(Unique_Squirrel_ID = Unique_Squirrel_ID)
     if request.method == "POST":
         if 'delete' in request.POST:
-            details.delete()
+            inofrmation.delete()
         else:
             list_=list(request.POST.values())[1: ]
             squirrel=sightings.objects.filter(Unique_Squirrel_ID = Unique_Squirrel_ID)
-            details = SquTable(request.POST, instance = squirrel[0])
-            if details.is_valid():
+            information= SquTable(request.POST, instance = squirrel[0])
+            if information.is_valid():
                 models=apps.get_model('sightings','sightings')
                 names = [a.name for a in model._Change.fields][1: ]
                 for s in squirrel:
