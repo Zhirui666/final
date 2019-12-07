@@ -8,7 +8,7 @@ class Command(BaseCommand):
         
         path=options['csv_file']
         f=open(path,'w+')
-        model=apps.get_model('vwsquirrel','sq_model')
+        model=apps.get_model('sightings','sightings')
         field_names=['Latitude','Longitude','Unique_Squirrel_ID','Shift','Date','Age','Primary_Fur_Color','Location','Specific_Location','Running','Chasing','Climbing','Eating','Foraging','Other_Activities','Kuks','Quaas','Moans','Tail_flags','Tail_twitches','Approaches','Indifferent','Runs_from']
         writer = csv.writer(f)
         writer.writerow(field_names)
