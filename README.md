@@ -23,7 +23,7 @@ The map displays the location of the squirrel sightings (100 points max)
 
  ii. Click ‘stats’ could help you visualize the up-to-date stats of the squirrels.
 
- iii. Click different ‘squirrels IDs’, you would get the information of different squirrels, and this page also allow you to edit the information of each squirrel.
+ iii. Click different ‘squirrels IDs’, you would get the information of different squirrels, and this page also allows you to edit the information of each squirrel.
     
  ### Group Information
  Group name and section: Project Group 64, Section 2
