@@ -1,0 +1,18 @@
+<html>
+<head>
+<title>Squirrel Details</title>
+</head>
+    <body>
+      <h1><b>Squirrel Details</b></h1>    
+      <a href="{% url 'stats' %}">Click to see stats</a>
+      <br>
+      <a href="{% url 'add' %}">Click to add a sighting</a>
+      <ul>
+        {% for item in squirrel_id %}
+            <li>
+                <a href="/sightings/{{ item.sid }}">{{ item.sid }}</a>
+            </li>
+        {% endfor %}
+      </ul>
+    </body>
+</html>
