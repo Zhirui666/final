@@ -37,13 +37,17 @@ def add(request):
         form = SquForm(request.POST)
         if form.is_valid():
             form.save()
-        return redirect('/sightings/')
-#         else:
-#             context= {'form': form,
-#                       'error': 'The form was not valid. Please do it again.'}
-#             return render(request,'sightings/edit.html' , context)
-       
+            return redirect(f'/sightings/')
+    else:
+        form = SquForm()
+        
+    context = {
+            'form': form,
+    }
     return render(request, 'sightings/add.html')
+
+       
+    
 
 def map(request):
     squirrels=sightings_model.objects.all()[:100]
@@ -72,24 +76,39 @@ def map(request):
 
 def edit(request,Unique_Squirrel_ID):
     information = sightings_model.objects.get(Unique_Squirrel_ID=Unique_Squirrel_ID)
-   # details = get_object_or_404(squ_model,Unique_Squirrel_ID=Unique_Squirrel_ID)
     if request.method == "POST":
-        if 'delete' in request.POST:
-            information.delete()
+        form = SquForm(request.POST, instance=information)
+        if form.is_valid():
+            form.save()
+            return redirect(f'/sightings/')
         else:
-            list_=list(request.POST.values())[1:]
-            sqs = sightings_model.objects.filter(Unique_Squirrel_ID=Unique_Squirrel_ID)
-            information = SquForm(request.POST,instance=sqs[0])
-            if information.is_valid():
-                model=apps.get_model('sightings','sightings_model')
-                field_names = [f.name for f in model._meta.fields][1:]
-                for sq in sqs:
-                    for idx,f in enumerate(field_names):
-                        if list_[idx]:
-                            setattr(sq,f,list_[idx])
-                    sq.save()
-        return redirect('/sightings/')
-    return render(request, 'sightings/edit.html',{'information':information})
+            form = SquForm(instance=information)
+        context = {
+            'form': form,
+        }
+        
+        return render(request, 'sightings/add.html',context)
+
+# def edit(request,Unique_Squirrel_ID):
+#     information = sightings_model.objects.get(Unique_Squirrel_ID=Unique_Squirrel_ID)
+#    # details = get_object_or_404(squ_model,Unique_Squirrel_ID=Unique_Squirrel_ID)
+#     if request.method == "POST":
+#         if 'delete' in request.POST:
+#             information.delete()
+#         else:
+#             list_=list(request.POST.values())[1:]
+#             sqs = sightings_model.objects.filter(Unique_Squirrel_ID=Unique_Squirrel_ID)
+#             information = SquForm(request.POST,instance=sqs[0])
+#             if information.is_valid():
+#                 model=apps.get_model('sightings','sightings_model')
+#                 field_names = [f.name for f in model._meta.fields][1:]
+#                 for sq in sqs:
+#                     for idx,f in enumerate(field_names):
+#                         if list_[idx]:
+#                             setattr(sq,f,list_[idx])
+#                     sq.save()
+#         return redirect('/sightings/')
+#     return render(request, 'sightings/edit.html',{'information':information})
 
 def stats(request):
     Totals=sightings_model.objects.all().count()
