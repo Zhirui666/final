@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
 from .forms import SquForm
 from django.forms import ModelForm
-from django.db.models import Count
+from django.db.models import Count, Q
 
 
 def index(request):
@@ -54,6 +54,17 @@ def map(request):
     return render(request, 'sightings/map.html', {'squirrels':squirrels})
 
 
+def details(request):
+    squirrel_id = list()
+    for i in sightings_model.objects.all():
+        i_dict = {}
+        i_dict['sid']=i.squirrel_id
+        squirrel_id.append(i_dict)
+    return render(request, 'sightings/details.html', {'squirrel_id':squirrel_id})
+
+    
+
+
 # def edit(request, Unique_Squirrel_ID):
 #     information = sightings.objects.get(Unique_Squirrel_ID = Unique_Squirrel_ID)
 #     if request.method == "POST":
@@ -81,13 +92,13 @@ def edit(request,Unique_Squirrel_ID):
         if form.is_valid():
             form.save()
             return redirect(f'/sightings/')
-        else:
-            form = SquForm(instance=information)
-        context = {
-            'form': form,
-        }
+    else:
+        form = SquForm(instance=information)
+    context = {
+        'form': form,
+    }
         
-        return render(request, 'sightings/add.html',context)
+    return render(request, 'sightings/add.html',context)
 
 # def edit(request,Unique_Squirrel_ID):
 #     information = sightings_model.objects.get(Unique_Squirrel_ID=Unique_Squirrel_ID)
