@@ -11,10 +11,10 @@
         <a href="/sightings/stats"> Stats!</a>
         
         <h3>Sightings Details</h3>
-            {% if sightings %}
+            {% if squirrels %}
                 <ul>
-                    {% for sighting in sightings %}
-                    <li><a href="/sightings/{{sighting.Unique_Squirrel_ID}}/">Squirrel ID:{{sighting.Unique_Squirrel_ID}}</a></li>
+                    {% for squirrel in squirrels %}
+                    <li><a href="/sightings/{{squirrel.Unique_Squirrel_ID}}/">Squirrel ID:{{squirrel.Unique_Squirrel_ID}}</a></li>
                     {%endfor%}
                 </ul>
             {% else %}
