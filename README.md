@@ -27,5 +27,5 @@ The map displays the location of the squirrel sightings (100 points max)
     
  ### Group Information
  Group name and section: Project Group 64, Section 2
-A list of UNI for each member on the team: [ll3351,]
-A link to the server running our application: https://tools-for-analytics-255423.appspot.com/
+ A list of UNI for each member on the team: [ll3351,]
+ A link to the server running our application: https://tools-for-analytics-255423.appspot.com/
