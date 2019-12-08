@@ -14,13 +14,35 @@ def index(request):
     context = {'squirrels': squirrels,}
     return render(request,'sightings/index.html', context)
 
+# def AddView(request):
+#     if request.method =='POST':
+#         form = SightingsForm(request.POST)
+#         #check data with form
+#         if form.is_valid():
+#             form.save()
+#             return redirect(f'/sightings/all.html')
+#         else:
+#             context= {'form': form,
+#                       'error': 'The form was not valid. Please do it again.'}
+#             return render(request,'sightings/edit.html' , context)
+#     else:
+#         form = SightingsForm()
+#     context = {
+#             'form':form,
+#     }
+#     return render(request,'sightings/add.html',context)
+
 def add(request):
     if request.method=='POST':
         form = SquForm(request.POST)
-        form.save()
-        return redirect('/sightings/')
-
-
+        if form.is_valid():
+            form.save()
+            return redirect('/sightings/')
+#         else:
+#             context= {'form': form,
+#                       'error': 'The form was not valid. Please do it again.'}
+#             return render(request,'sightings/edit.html' , context)
+       
     return render(request, 'sightings/add.html')
 
 def map(request):
