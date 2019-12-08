@@ -37,7 +37,7 @@ def add(request):
         form = SquForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/sightings/')
+        return redirect('/sightings/')
 #         else:
 #             context= {'form': form,
 #                       'error': 'The form was not valid. Please do it again.'}
