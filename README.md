@@ -31,6 +31,8 @@ The map displays the location of the squirrel sightings (100 points max)
  A list of UNI for each member on the team: [ll3351,zc2503]
  
  Links to the server running our application: 
+ 
  https://tools-for-analytics-255423.appspot.com/sightings/
+ 
  https://tools-for-analytics-255423.appspot.com/map/
 
