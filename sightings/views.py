@@ -44,7 +44,7 @@ def add(request):
     context = {
             'form': form,
     }
-    return render(request, 'sightings/add.html')
+    return render(request, 'sightings/add.html',context)
 
        
     
