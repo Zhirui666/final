@@ -25,4 +25,7 @@ The map displays the location of the squirrel sightings (100 points max)
 
  iii. Click different ‘squirrels IDs’, you would get the information of different squirrels, and this page also allow you to edit the information of each squirrel.
     
- 
+ ### Group Information
+ Group name and section: Project Group 64, Section 2
+A list of UNI for each member on the team: [ll3351,]
+A link to the server running our application:
