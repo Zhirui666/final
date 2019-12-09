@@ -15,7 +15,7 @@ to import squirrel data to web databses or export real-time squirrel date from w
 
 1. Map: at the path  https://tools-for-analytics-255423.appspot.com/map/
 
-The map displays the location of the squirrel sightings (100 points max)
+ The map displays the location of the squirrel sightings (100 points max)
 
 2. Sightings: at  https://tools-for-analytics-255423.appspot.com/sightings/
 
